@@ -1,0 +1,80 @@
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#phone {
+    width: 71.50mm;
+    height: 146.60mm;
+    background-color: #141414;
+    border-radius: 40px;
+    position: relative;
+    box-shadow: 8px 8px 100px 49px rgba(66, 68, 90, 0.205);
+    margin-top: 10%;
+}
+
+#phone #screen {
+    margin: 1.9mm;
+    width: 67.5mm;
+    height: 142.6mm;
+    background-color: #e4e4e7;
+    border-radius: 32px;
+    padding: 10px;
+    padding-top: 30px;
+    box-sizing: border-box;
+    display: flex;
+}
+
+#phone #notch {
+    position: absolute;
+    top: 5px;
+    left: 64px;
+    width: 37.5mm;
+    height: 6.6mm;
+    background-color: #141414;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+#screen input {
+    width: 62mm;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 5px;
+    border: gray;
+    background-color: white;
+}
+
+.foods {
+    width: 62mm;
+    max-height: 92mm;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: auto;
+}
+
+.foods table {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.foods table, td, tr, th {
+    background-color: white;
+    border-collapse: collapse;
+    border: 1px solid #d1d1d1;
+}
+
+.foods table .price::after {
+    content: ' zł';
+}
+
+.foods table td {
+    max-width: 5mm;
+    white-space: nowrap;
+	overflow: hidden;
+}

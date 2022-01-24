@@ -1,10 +1,90 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <title>Kcalcolator</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    
+    <div id="phone">
+        <div id="notch">
+
+        </div>
+        <div id="screen">
+            <div id="kcalculator">
+                <div id="title">
+                    <h3><b>Kcalcolator</b></h3>
+                </div>
+                <input type="text" placeholder="Nazwa jedzenia" v-model="name">
+                <input type="number" placeholder="Kalorie" v-model="kcal">
+                <input type="number" placeholder="Cena" v-model="price">
+                <input type="text" placeholder="Skąd pochodzi" v-model="from">
+                <input type="button" value="Wprowadź" @click="addItem">
+            <div class="foods">
+                <table>
+                    <tr>
+                        <td></td><th>Nazwa</th> <th>Kalorie</th> <th>Cena</th> <th>Gdzie</th> <th>Ratio</th>
+                    </tr>
+                <tr class="item" v-for="item in items">
+                    <td style="text-align: center;">
+                    <span class="glyphicon glyphicon-trash" @click="removeItem(item.id)"></span>
+                </td>
+                <td>{{ item.name }}</td> 
+                <td>{{ item.kcal }}</td> 
+                <td class="price">{{ item.price }}</td> 
+                <td>{{ item.from }}</td> 
+                <td v-if="item.ratio >= 50"><span style="color: #79ca79; font-weight: bold;">{{ item.ratio }}</span></td>
+                <td v-else>{{ item.ratio }}</td>
+                </tr>
+                </table>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+    el: '#kcalculator',
+    data: {
+        name: '',
+        kcal: '',
+        price: '',
+        from: '',
+        ratio: '',
+        items: JSON.parse(localStorage.getItem('data'))
+    },
+    methods: {
+        addItem: function () {
+            let ratio = this.kcal/this.price;
+            ratio = Math.round(ratio, 2)
+            this.items.push({
+                id: this.items.length,
+                name: this.name, 
+                kcal: this.kcal,
+                price: this.price,
+                from: this.from,
+                ratio: ratio
+            })
+            localStorage.setItem('data', JSON.stringify(this.items))
+            this.name = '';
+            this.kcal = '';
+            this.price = '';
+            this.from = '';
+        },
+        removeItem: function (id) {
+            for(let i in this.items){
+                if(this.items[i].id == id) this.items.splice(i, 1)
+            }
+            
+            localStorage.setItem('data', JSON.stringify(this.items))
+        }
+    }
+})
+    </script>
 </body>
+
 </html>
